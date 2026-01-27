@@ -4,7 +4,7 @@ Ce dépôt contient mon portfolio de fin de cursus (BUT 3 Informatique à l'IUT 
 
 Accès au site
 
-Le site est hébergé via GitHub Pages : [Lien vers ton site ici]
+Le site est hébergé via GitHub Pages : https://lotfimln.github.io/portfolio-2026/
 
 Stack Technique
 

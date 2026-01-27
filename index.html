@@ -1,0 +1,472 @@
+  <!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotfi Melouane | Portfolio 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+        
+        :root {
+            --tata-yellow: #F4D03F;
+            --tata-red: #E74C3C;
+            --tata-green: #1ABC9C;
+            --tata-tan: #FFF9C4;
+            --tata-black: #1A1A1B;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #E5E7EB;
+            color: var(--tata-black);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .mono { font-family: 'Space Mono', monospace; }
+
+        /* Texture de grain style Tata Rekso */
+        .grainy::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .sidebar-gradient {
+            background: linear-gradient(to bottom, var(--tata-yellow), #F39C12, var(--tata-red), var(--tata-green));
+        }
+
+        .nav-vertical {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        /* Animations de dévoilement */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .bento-tile {
+            border: 2px solid #000;
+            background: white;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-tile:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px #000;
+        }
+
+        /* Scrollbar brute */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--tata-yellow); border: 2px solid #000; }
+
+        .tag-pill {
+            border: 1px solid #000;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Space Mono', monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag-pill:hover {
+            background: black;
+            color: white;
+        }
+
+        input, textarea {
+            border: 2px solid #000;
+            padding: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            width: 100%;
+            background: #fff;
+            color: black;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        #success-msg { display: none; }
+    </style>
+</head>
+<body class="grainy min-h-screen text-black">
+
+    <!-- BARRE LATÉRALE NAVIGATION -->
+    <aside class="fixed left-0 top-0 h-screen w-12 md:w-16 sidebar-gradient border-r-4 border-black z-50 flex flex-col justify-between py-10 items-center">
+        <span class="font-black text-xl tracking-tighter mono">L.M</span>
+        <div class="nav-vertical flex justify-center gap-10 py-4 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] mono text-black">
+            <a href="#contact" class="hover:text-white transition-all">CONTACT</a>
+            <a href="#competences" class="hover:text-white transition-all">EXPERTISE</a>
+            <a href="#projets" class="hover:text-white transition-all">PROJETS</a>
+            <a href="#accueil" class="hover:text-white transition-all">ACCUEIL</a>
+        </div>
+        <div class="flex flex-col gap-6 text-xl">
+            <a href="https://github.com/Lotfimln" target="_blank" class="hover:scale-125 transition text-black"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/lotfi-melouane" target="_blank" class="hover:scale-125 transition text-black"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="ml-12 md:ml-16 p-2 md:p-4 space-y-2">
+
+        <!-- SECTION 1 : ACCUEIL -->
+        <section id="accueil" class="grid grid-cols-12 gap-2">
+            <div class="col-span-12 lg:col-span-8 bento-tile bg-[#FFF9C4] p-8 md:p-14 reveal active border-black text-black">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-4">
+                        <span class="tag-pill bg-black text-white border-black">BUT 3 INFORMATIQUE • 2026</span>
+                        <div class="h-[1px] flex-grow bg-black opacity-20"></div>
+                    </div>
+                    <h1 class="text-5xl md:text-9xl font-black leading-[0.85] tracking-tighter uppercase text-black">
+                        Lotfi <br> <span class="bg-black text-white px-2 italic text-6xl md:text-8xl">Melouane</span>
+                    </h1>
+                    <p class="text-xl md:text-3xl font-bold max-w-2xl leading-snug text-black">
+                        Développeur spécialisé dans la conception d'architectures Backend et l'exploitation stratégique de données.
+                    </p>
+                    <div class="flex items-center gap-4 mt-8 text-black">
+                        <div class="p-3 border-2 border-black rounded-full animate-bounce">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </div>
+                        <span class="mono text-[10px] font-bold uppercase tracking-widest italic opacity-50">Explorer les réalisations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-4 bento-tile bg-[#1ABC9C] reveal active border-black">
+                <div class="relative h-full min-h-[400px] overflow-hidden group">
+                    <img src="img/PortraitLotfi.JPEG" alt="Portrait Lotfi" class="w-full h-full object-cover contrast-125 transition-transform duration-1000 group-hover:scale-105">
+                    <div class="absolute bottom-6 left-6 bg-white border-2 border-black p-4 font-black text-xs rotate-[-3deg] shadow-lg text-black">
+                        Portrait <br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : RÉALISATIONS -->
+        <section id="projets" class="grid grid-cols-12 gap-2 text-black">
+            <!-- TITRE SECTION -->
+            <div class="col-span-12 md:col-span-4 bento-tile bg-black text-white p-8 reveal active border-black">
+                <div class="h-full flex flex-col justify-between">
+                    <span class="mono text-[10px] font-bold tracking-[0.3em] opacity-50 uppercase">Projets S1 — S6</span>
+                    <div>
+                        <h2 class="text-6xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white">Réalisations</h2>
+                        <div class="mt-4 h-1 w-20 bg-white border-white"></div>
+                    </div>
+                    <div class="text-[10px] mono opacity-50 uppercase">Lien entre projets et expertises</div>
+                </div>
+            </div>
+
+            <!-- PROJET 1 : IRIT (PHARE) -->
+            <div class="col-span-12 md:col-span-8 bento-tile p-8 md:p-12 reveal active border-black bg-white">
+                <div class="flex flex-col lg:flex-row gap-10 h-full">
+                    <div class="lg:w-1/2 space-y-6 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <span class="tag-pill bg-[#1ABC9C] text-white border-black">PROJET PHARE • STAGE 2025</span>
+                            <h3 class="text-3xl md:text-4xl font-black uppercase leading-none tracking-tighter">Cartographie Scientifique</h3>
+                            <p class="text-sm font-medium leading-relaxed text-slate-600">
+                                Architecture d'une plateforme de pilotage de la production scientifique. API REST Flask sécurisée (JWT), modélisation Oracle avec requêtes récursives complexes et dashboards interactifs.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mono">
+                            <a href="#exp-backend" class="tag-pill border-black">BACKEND API</a>
+                            <a href="#exp-data" class="tag-pill border-black">ORACLE DB</a>
+                            <a href="#exp-viz" class="tag-pill border-black">VISUALISATION</a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 border-2 border-white bg-stone-50 overflow-hidden shadow-[10px_10px_0px_#000] relative">
+                        <img src="img/PageIritGlobal.png" alt="Interface Irit" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-white border-2 border-black p-2 font-black text-[10px] uppercase">CSR Prototype</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOC IDENTITÉ -->
+            <div class="col-span-12 md:col-span-6 bento-tile bg-[#F4D03F] flex items-center justify-center p-8 reveal active text-black border-black text-center">
+                <div>
+                    <span class="text-6xl font-black italic leading-none">a</span>
+                    <h2 class="text-4xl font-black tracking-tighter -mt-2 uppercase">Data Specialist</h2>
+                    <p class="mono text-[10px] font-bold tracking-[0.2em] mt-2 uppercase text-slate-700">& much more</p>
+                </div>
+            </div>
+
+            <!-- PROJET 2 : BINGEMARKING -->
+            <div class="col-span-12 md:col-span-6 bento-tile bg-[#E74C3C] text-white p-8 md:p-12 reveal active border-black">
+                <div class="flex flex-col lg:flex-row gap-10 h-full">
+                    <div class="lg:w-1/2 space-y-6 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <span class="tag-pill border-white text-white">ANALYSE & ALGORITHMIQUE</span>
+                            <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none text-white">BingeMarking Engine</h3>
+                            <p class="text-sm font-medium opacity-90 leading-relaxed text-white">
+                                Moteur de recommandation basé sur l'analyse de similarité textuelle (TF-IDF) d'un corpus de 128 séries. Développement d'un pipeline complet de traitement.
+                            </p>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="#exp-backend" class="tag-pill border-white text-white">PYTHON / FLASK</a>
+                            <a href="#exp-viz" class="tag-pill border-white text-white">LOGIQUE DATA</a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 border-2 border-white bg-stone-50 overflow-hidden shadow-[10px_10px_0px_#000]">
+                        <img src="img/BingeMarking.png" alt="BingeMarking" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJET 3 : DATA WAREHOUSE -->
+            <div id="data-warehouse" class="col-span-12 md:col-span-6 bento-tile bg-white p-8 md:p-10 reveal active text-black border-black">
+                <div class="space-y-6">
+                    <span class="tag-pill bg-black text-white border-black">CONCEPTION DÉCISIONNELLE</span>
+                    <h3 class="text-4xl font-black uppercase tracking-tighter text-black">Entrepôt de Données</h3>
+                    <p class="text-sm font-medium text-slate-600 leading-relaxed">
+                        Mise en place d'une infrastructure décisionnelle complète via Talend Open Studio. Modélisation en étoile (Faits/Dimensions), consolidation et historisation.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 border-t border-black pt-6">
+                        <div>
+                            <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1">Stack</span>
+                            <a href="#exp-data" class="text-[10px] font-bold uppercase underline">Talend / Oracle</a>
+                        </div>
+                        <div>
+                            <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1 text-black">Focus</span>
+                            <span class="text-[10px] font-bold uppercase">Historisation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJET 4 : API SPORT -->
+            <div class="col-span-12 md:col-span-6 bento-tile bg-[#1ABC9C] p-8 md:p-10 reveal active text-white border-black">
+                <div class="h-full flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <span class="tag-pill border-white text-white">DÉVELOPPEMENT SERVEUR</span>
+                        <h3 class="text-4xl font-black uppercase tracking-tighter leading-none text-white">Gestion d'Effectifs API</h3>
+                        <p class="text-sm font-bold opacity-90 leading-relaxed text-white">
+                            Conception d'un service REST robuste avec authentification (JWT). Architecture modulaire permettant une gestion fluide des effectifs.
+                        </p>
+                    </div>
+                    <div class="mt-8 flex justify-between items-center text-white">
+                        <a href="#exp-backend" class="mono text-[10px] font-bold uppercase underline text-white">Java / Python / Git</a>
+                        <div class="w-10 h-10 border border-white flex items-center justify-center rounded-full text-white"><i class="fa-solid fa-code text-white"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : EXPERTISE -->
+        <section id="competences" class="grid grid-cols-12 gap-2 text-black">
+            <div class="col-span-12 lg:col-span-4 bento-tile p-12 reveal active text-black border-black">
+                <h2 class="text-5xl font-black italic mb-10 uppercase tracking-tighter leading-none text-black">Expertise <br> <span class="text-[#1ABC9C]">technique</span></h2>
+                <div class="space-y-10">
+                    <div class="space-y-2">
+                        <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
+                            <span>Développement Backend</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="h-6 bg-slate-100 border-2 border-black flex items-center px-1">
+                            <div class="h-2 bg-black w-[90%]"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
+                            <span>Architecture de Données</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="h-6 bg-slate-100 border-2 border-black flex items-center px-1">
+                            <div class="h-2 bg-black w-[85%]"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
+                            <span>Analyse & Visualisation</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="h-6 bg-slate-100 border-2 border-black flex items-center px-1">
+                            <div class="h-2 bg-black w-[80%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-2 text-black">
+                <!-- Stack Backend (Ancre exp-backend) -->
+                <div id="exp-backend" class="bento-tile bg-[#FFF9C4] p-8 reveal active border-black scroll-mt-24">
+                    <div class="h-full flex flex-col justify-between">
+                        <div>
+                            <span class="mono text-[10px] font-black uppercase mb-4 block opacity-50 text-black">Langages & Logique</span>
+                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-black">Développement <br> Serveur</h4>
+                            <div class="flex flex-wrap gap-2 text-black">
+                                <span class="tag-pill border-black bg-white">Python / Flask</span>
+                                <span class="tag-pill border-black bg-white">Java</span>
+                                <span class="tag-pill border-black bg-white">PHP / C</span>
+                                <span class="tag-pill border-black bg-white">JWT Auth</span>
+                                <span class="tag-pill border-black bg-white">API REST</span>
+                                <span class="tag-pill border-black bg-white">SQLAlchemy</span>
+                            </div>
+                        </div>
+                        <p class="text-xs font-bold leading-relaxed text-slate-600 mt-6 text-black">Conception d'architectures modulaires sécurisées, gestion des sessions et routage API optimisé.</p>
+                    </div>
+                </div>
+
+                <!-- Stack Data (Ancre exp-data et exp-viz) -->
+                <div id="exp-data" class="bento-tile bg-[#1ABC9C] p-8 reveal active border-black text-white scroll-mt-24">
+                    <div id="exp-viz" class="h-full flex flex-col justify-between text-white scroll-mt-24">
+                        <div>
+                            <span class="mono text-[10px] font-black uppercase mb-4 block opacity-70 text-white">Extraction & Valorisation</span>
+                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-white">Architecture <br> des Données</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tag-pill border-white bg-white text-black">Oracle SQL</span>
+                                <span class="tag-pill border-white bg-white text-black">Talend ETL</span>
+                                <span class="tag-pill border-white bg-white text-black">Pandas / Numpy</span>
+                                <span class="tag-pill border-white bg-white text-black">Chart.js</span>
+                                <span class="tag-pill border-white bg-white text-black">NoSQL / SQLite</span>
+                                <span class="tag-pill border-white bg-white text-black">TF-IDF</span>
+                            </div>
+                        </div>
+                        <p class="text-[10px] font-bold leading-relaxed opacity-90 mt-6 text-white">Maîtrise du cycle de la donnée : modélisation (MCD/MLD), flux ETL et restitution via dashboards stratégiques.</p>
+                    </div>
+                </div>
+
+                <!-- Outils & Environnement -->
+                <div class="col-span-1 md:col-span-2 bento-tile bg-white p-6 reveal active border-black flex flex-row items-center justify-between text-black">
+                    <div>
+                        <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1">Environnement & Outils</span>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="text-xs font-black uppercase tracking-widest text-black">GitHub</span>
+                            <span class="text-xs opacity-20">/</span>
+                            <span class="text-xs font-black uppercase tracking-widest text-black">Linux VM</span>
+                            <span class="text-xs opacity-20">/</span>
+                            <span class="text-xs font-black uppercase tracking-widest text-black">SQL Developer</span>
+                            <span class="text-xs opacity-20">/</span>
+                            <span class="text-xs font-black uppercase tracking-widest text-black">Modelio</span>
+                            <span class="text-xs opacity-20">/</span>
+                            <span class="text-xs font-black uppercase tracking-widest text-black">VS Code</span>
+                            <span class="text-xs opacity-20">/</span>
+                            <span class="text-xs font-black uppercase tracking-widest text-black">Postman</span>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-black italic opacity-10 hidden md:block uppercase tracking-tighter text-black">Tools</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 : CONTACT & CV -->
+        <section id="contact" class="grid grid-cols-12 gap-2 text-black">
+            <!-- CTA GAUCHE -->
+            <div class="col-span-12 lg:col-span-7 bento-tile bg-white p-10 md:p-14 reveal active text-black border-black">
+                <div class="h-full flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-6xl md:text-8xl font-black mb-8 uppercase tracking-tighter leading-none text-black">Parlons <br> DATA.</h2>
+                        <p class="text-xl font-bold mb-12 text-black">Disponible pour collaborer sur des défis Backend et Data dès fin 2026.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <a href="mailto:lotfi.melouane@gmail.com" class="text-2xl md:text-4xl font-black hover:text-[#E74C3C] transition-colors border-b-4 border-black inline-block leading-none mono border-black text-black">lotfi.melouane@gmail.com</a>
+                        <p class="text-[10px] mono font-bold text-slate-400 mt-4 uppercase tracking-widest">Toulouse // Mobile France</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CV & FORMULAIRE -->
+            <div class="col-span-12 lg:col-span-5 bento-tile bg-[#F4D03F] p-8 reveal active text-black border-black">
+                <div class="h-full flex flex-col gap-8 text-black">
+                    <!-- Partie CV -->
+                    <div>
+                        <span class="tag-pill bg-black text-white border-black text-white">Contact</span>
+                        <h3 class="text-5xl font-black italic mt-4 uppercase leading-none tracking-tighter text-black">CV 2026</h3>
+                        <a href="CV_Lotfi_Melouane.pdf" target="_blank" class="mt-6 bg-black text-white px-8 py-5 text-xs font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 mono w-full text-white">
+                            Consulter le PDF <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-white"></i>
+                        </a>
+                    </div>
+
+                    <div class="h-[2px] w-full bg-black opacity-10"></div>
+
+                    <!-- Formulaire de Contact avec gestion JS -->
+                    <div class="flex-grow relative text-black">
+                        <div id="form-container">
+                            <h4 class="mono text-[10px] font-black uppercase mb-4 italic tracking-widest text-black">Contact rapide /</h4>
+                            <form id="contact-form" class="space-y-3">
+                                <input type="text" name="name" placeholder="VOTRE NOM" required class="placeholder-black/30 border-black text-black">
+                                <input type="email" name="email" placeholder="VOTRE EMAIL" required class="placeholder-black/30 border-black text-black">
+                                <textarea name="message" placeholder="VOTRE MESSAGE" rows="3" required class="placeholder-black/30 border-black text-black"></textarea>
+                                <button type="submit" class="bg-black text-white px-6 py-4 text-[10px] font-black uppercase border-2 border-black hover:bg-[#1ABC9C] transition-all w-full mono border-black text-white">
+                                    Envoyer la demande ✖
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div id="success-msg" class="h-full flex flex-col items-center justify-center text-center space-y-4 py-6 text-black">
+                            <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center text-xl border-2 border-black shadow-[4px_4px_0px_#1ABC9C]">
+                                <i class="fa-solid fa-check text-white"></i>
+                            </div>
+                            <h4 class="font-black uppercase tracking-widest text-black">Message Reçu !</h4>
+                            <p class="mono text-[10px] font-bold uppercase text-black">Merci, Lotfi vous répondra très vite.</p>
+                            <button onclick="resetForm()" class="text-[9px] font-black underline uppercase mono mt-2 hover:text-[#1ABC9C] text-black">Renvoyer un autre message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-20 text-center reveal active opacity-30 text-black">
+            <div class="h-[2px] w-16 bg-black mx-auto mb-8 border-black"></div>
+            <p class="font-black text-[9px] uppercase tracking-[0.5em] mono text-black">
+                Lotfi Melouane • Portfolio BUT 3 Informatique • S6 AGED & IA • © 2026
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Reveal Observer
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Gestion du Formulaire
+        const contactForm = document.getElementById('contact-form');
+        const formContainer = document.getElementById('form-container');
+        const successMsg = document.getElementById('success-msg');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                formContainer.style.display = 'none';
+                successMsg.style.display = 'flex';
+            });
+        }
+
+        window.resetForm = function() {
+            contactForm.reset();
+            formContainer.style.display = 'block';
+            successMsg.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@ Accès au site
 
 Le site est hébergé via GitHub Pages : [Lien vers ton site ici]
 
-🛠 Stack Technique
+Stack Technique
 
 Frontend : HTML5, Tailwind CSS (Design Tata Rekso)
 

@@ -24,14 +24,5 @@ Entrepôt de Données : Modélisation décisionnelle et historisation via Talend
 
 Gestion d'Effectifs API : Conception d'un service REST sécurisé.
 
- Évaluation PPP S6
-
-Ce portfolio répond aux exigences de l'unité S6 :
-
-Présentation de la progression BUT 1 -> BUT 3.
-
-Transitivité entre projets et expertises.
-
-Absence de terminologie interne au BUT.
 
 © 2026 Lotfi Melouane

@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-2026",
+  "version": "1.0.0",
+  "description": "Portfolio Professionnel - Lotfi Melouane (2026)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lotfimln/portfolio-2026.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lotfimln/portfolio-2026/issues"
+  },
+  "homepage": "https://github.com/Lotfimln/portfolio-2026#readme",
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.1",
+    "tailwindcss": "^4.2.1",
+    "vite": "^7.3.1"
+  }
+}

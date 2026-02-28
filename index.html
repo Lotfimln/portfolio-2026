@@ -264,111 +264,113 @@
 
         <!-- SECTION 3 : EXPERTISE -->
         <section id="competences" class="grid grid-cols-12 gap-2 text-black">
-            <div class="col-span-12 lg:col-span-4 bento-tile p-12 reveal active text-black border-black">
+            <!-- Colonne de gauche : Savoir-Faire Corporate -->
+            <div class="col-span-12 lg:col-span-4 bento-tile p-10 md:p-12 reveal active text-black border-black bg-white">
                 <h2 class="text-5xl font-black italic mb-10 uppercase tracking-tighter leading-none text-black">
-                    Expertise <br> <span class="text-tata-green">technique</span></h2>
-                <div class="space-y-10">
-                    <div class="space-y-2">
-                        <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
-                            <span>Développement Backend</span>
-                            <span>90%</span>
+                    Expertise <br> <span class="text-tata-green">technique</span>
+                </h2>
+                <div class="space-y-8">
+                    <!-- Compétence 1 -->
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 bg-black text-white min-w-[32px] w-8 h-8 flex items-center justify-center border-2 border-black">
+                            <i class="fa-solid fa-sitemap"></i>
                         </div>
-                        <div class="h-6 bg-slate-100 border-2 border-black flex items-center px-1">
-                            <div class="h-2 bg-black w-[90%]"></div>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
-                            <span>Architecture de Données</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="h-6 bg-slate-100 border-2 border-black flex items-center px-1">
-                            <div class="h-2 bg-black w-[85%]"></div>
+                        <div>
+                            <h4 class="font-black uppercase text-sm leading-tight">Conception d'Architecture</h4>
+                            <p class="text-xs text-slate-600 mt-1 font-medium leading-relaxed">Design de systèmes d'information scalables et modélisation de bases de données (MCD/MLD).</p>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
-                            <span>Analyse & Visualisation</span>
-                            <span>80%</span>
+                    <!-- Compétence 2 -->
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 bg-black text-white min-w-[32px] w-8 h-8 flex items-center justify-center border-2 border-black">
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
-                        <div class="h-6 bg-slate-100 border-2 border-black flex items-center px-1">
-                            <div class="h-2 bg-black w-[80%]"></div>
+                        <div>
+                            <h4 class="font-black uppercase text-sm leading-tight">Sécurisation de Données</h4>
+                            <p class="text-xs text-slate-600 mt-1 font-medium leading-relaxed">Mise en place d'authentification JWT, gestion des rôles et sécurisation des API REST.</p>
+                        </div>
+                    </div>
+                    <!-- Compétence 3 -->
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 bg-black text-white min-w-[32px] w-8 h-8 flex items-center justify-center border-2 border-black">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black uppercase text-sm leading-tight">Administration de BDD</h4>
+                            <p class="text-xs text-slate-600 mt-1 font-medium leading-relaxed">Optimisation de requêtes complexes, gestion de l'historisation et maintenance (Oracle, PostgreSQL).</p>
+                        </div>
+                    </div>
+                    <!-- Compétence 4 -->
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 bg-black text-white min-w-[32px] w-8 h-8 flex items-center justify-center border-2 border-black">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black uppercase text-sm leading-tight">Gestion de Projet</h4>
+                            <p class="text-xs text-slate-600 mt-1 font-medium leading-relaxed">Intégration aux méthodologies Agiles (Scrum), versionning Git et travail en équipe multicompétences.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-2 text-black">
-                <!-- Stack Backend (Ancre exp-backend) -->
+                <!-- Stack Logiciel -->
                 <div id="exp-backend" class="bento-tile bg-tata-tan p-8 reveal active border-black scroll-mt-24">
                     <div class="h-full flex flex-col justify-between">
                         <div>
-                            <span
-                                class="mono text-[10px] font-black uppercase mb-4 block opacity-50 text-black">Langages
-                                & Logique</span>
-                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-black">Développement <br>
-                                Serveur</h4>
+                            <span class="mono text-[10px] font-black uppercase mb-4 block opacity-50 text-black">Backend & API</span>
+                            <h4 class="text-3xl font-black uppercase mb-6 tracking-tight text-black leading-none">Ingénierie <br> Logicielle</h4>
                             <div class="flex flex-wrap gap-2 text-black">
                                 <span class="tag-pill border-black bg-white">Python / Flask</span>
-                                <span class="tag-pill border-black bg-white">Java</span>
-                                <span class="tag-pill border-black bg-white">PHP / C</span>
-                                <span class="tag-pill border-black bg-white">JWT Auth</span>
-                                <span class="tag-pill border-black bg-white">API REST</span>
-                                <span class="tag-pill border-black bg-white">SQLAlchemy</span>
+                                <span class="tag-pill border-black bg-white">Java / C</span>
+                                <span class="tag-pill border-black bg-white">Architectures REST</span>
+                                <span class="tag-pill border-black bg-white">Algorithmique</span>
+                                <span class="tag-pill border-black bg-white">Design Patterns</span>
+                                <span class="tag-pill border-black bg-white">Tests Unitaires</span>
                             </div>
                         </div>
-                        <p class="text-xs font-bold leading-relaxed text-slate-600 mt-6 text-black">Conception
-                            d'architectures modulaires sécurisées, gestion des sessions et routage API optimisé.</p>
+                        <p class="text-xs font-bold leading-relaxed text-slate-600 mt-6 text-black">Création de services backend robustes, maintenables et performants, centrés sur la logique métier.</p>
                     </div>
                 </div>
 
-                <!-- Stack Data (Ancre exp-data et exp-viz) -->
-                <div id="exp-data"
-                    class="bento-tile bg-tata-green p-8 reveal active border-black text-white scroll-mt-24">
+                <!-- Stack Data -->
+                <div id="exp-data" class="bento-tile bg-tata-green p-8 reveal active border-black text-white scroll-mt-24">
                     <div id="exp-viz" class="h-full flex flex-col justify-between text-white scroll-mt-24">
                         <div>
-                            <span
-                                class="mono text-[10px] font-black uppercase mb-4 block opacity-70 text-white">Extraction
-                                & Valorisation</span>
-                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-white">Architecture <br>
-                                des Données</h4>
+                            <span class="mono text-[10px] font-black uppercase mb-4 block opacity-70 text-white">Stockage & Flux</span>
+                            <h4 class="text-3xl font-black uppercase mb-6 tracking-tight text-white leading-none">Data <br> Engineering</h4>
                             <div class="flex flex-wrap gap-2">
                                 <span class="tag-pill border-white bg-white text-black">Oracle SQL</span>
-                                <span class="tag-pill border-white bg-white text-black">Talend ETL</span>
+                                <span class="tag-pill border-white bg-white text-black">Talend (ETL)</span>
+                                <span class="tag-pill border-white bg-white text-black">NoSQL</span>
+                                <span class="tag-pill border-white bg-white text-black">Data Warehouse</span>
                                 <span class="tag-pill border-white bg-white text-black">Pandas / Numpy</span>
-                                <span class="tag-pill border-white bg-white text-black">Chart.js</span>
-                                <span class="tag-pill border-white bg-white text-black">NoSQL / SQLite</span>
-                                <span class="tag-pill border-white bg-white text-black">TF-IDF</span>
+                                <span class="tag-pill border-white bg-white text-black">Visualisation</span>
                             </div>
                         </div>
-                        <p class="text-[10px] font-bold leading-relaxed opacity-90 mt-6 text-white">Maîtrise du cycle de
-                            la donnée : modélisation (MCD/MLD), flux ETL et restitution via dashboards stratégiques.</p>
+                        <p class="text-[10px] font-bold leading-relaxed opacity-90 mt-6 text-white">Maîtrise complète du pipeline de données : modélisation, extraction, transformation et restitution.</p>
                     </div>
                 </div>
 
-                <!-- Outils & Environnement -->
-                <div
-                    class="col-span-1 md:col-span-2 bento-tile bg-white p-6 reveal active border-black flex flex-row items-center justify-between text-black">
+                <!-- Outils & Infrastructure -->
+                <div class="col-span-1 md:col-span-2 bento-tile bg-white p-6 md:p-8 reveal active border-black flex flex-row items-center justify-between text-black">
                     <div>
-                        <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1">Environnement &
-                            Outils</span>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="text-xs font-black uppercase tracking-widest text-black">GitHub</span>
-                            <span class="text-xs opacity-20">/</span>
-                            <span class="text-xs font-black uppercase tracking-widest text-black">Linux VM</span>
-                            <span class="text-xs opacity-20">/</span>
-                            <span class="text-xs font-black uppercase tracking-widest text-black">SQL Developer</span>
-                            <span class="text-xs opacity-20">/</span>
-                            <span class="text-xs font-black uppercase tracking-widest text-black">Modelio</span>
-                            <span class="text-xs opacity-20">/</span>
-                            <span class="text-xs font-black uppercase tracking-widest text-black">VS Code</span>
-                            <span class="text-xs opacity-20">/</span>
-                            <span class="text-xs font-black uppercase tracking-widest text-black">Postman</span>
+                        <span class="mono text-[10px] font-black uppercase opacity-40 block mb-3 text-black">Infrastructure & Déploiement</span>
+                        <div class="flex flex-wrap gap-3 items-center">
+                            <span class="text-sm font-black uppercase tracking-widest text-black">Git / GitHub</span>
+                            <span class="text-sm opacity-20">/</span>
+                            <span class="text-sm font-black uppercase tracking-widest text-black">Linux (Admin)</span>
+                            <span class="text-sm opacity-20">/</span>
+                            <span class="text-sm font-black uppercase tracking-widest text-black">Docker</span>
+                            <span class="text-sm opacity-20">/</span>
+                            <span class="text-sm font-black uppercase tracking-widest text-black">CI/CD</span>
+                            <span class="text-sm opacity-20">/</span>
+                            <span class="text-sm font-black uppercase tracking-widest text-black">Sécurité Globale</span>
+                            <span class="text-sm opacity-20">/</span>
+                            <span class="text-sm font-black uppercase tracking-widest text-black">Postman</span>
                         </div>
                     </div>
-                    <div
-                        class="text-4xl font-black italic opacity-10 hidden md:block uppercase tracking-tighter text-black">
-                        Tools</div>
+                    <div class="text-5xl font-black italic opacity-5 hidden md:block uppercase tracking-tighter text-black">DevOps</div>
                 </div>
             </div>
         </section>

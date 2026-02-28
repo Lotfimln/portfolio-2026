@@ -445,7 +445,7 @@
                         <span class="tag-pill bg-black text-white border-black text-white">Contact</span>
                         <h3 class="text-5xl font-black italic mt-4 uppercase leading-none tracking-tighter text-black">
                             CV 2026</h3>
-                        <a href="CV_Lotfi_Melouane.pdf" target="_blank"
+                        <a href="CV_Lotfi_Melouane.pdf" target="/CV_Lotfi_Melouane.pdf"
                             class="mt-6 bg-black text-white px-8 py-5 text-xs font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 mono w-full text-white">
                             Consulter le PDF <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-white"></i>
                         </a>
@@ -466,6 +466,9 @@
                                 <input type="hidden" name="_captcha" value="false">
                                 <!-- Rendre l'email reçu visuellement propre -->
                                 <input type="hidden" name="_template" value="box">
+                                <!-- Redirection après envoi -->
+                                <input type="hidden" name="_next"
+                                    value="https://lotfimln.github.io/portfolio-2026/#contact">
 
                                 <input type="text" name="name" placeholder="VOTRE NOM" required
                                     class="placeholder-black/30 border-black text-black">
@@ -491,7 +494,7 @@
                                 vite.</p>
                             <button onclick="resetForm()"
                                 class="text-[9px] font-black underline uppercase mono mt-2 hover:text-tata-green text-black">Renvoyer
-                                un autre message</button>
+                                un message</button>
                         </div>
                     </div>
                 </div>

@@ -13,49 +13,15 @@ const contactForm = document.getElementById('contact-form')
 const formContainer = document.getElementById('form-container')
 const successMsg = document.getElementById('success-msg')
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        
-        const btn = contactForm.querySelector('button[type="submit"]')
-        const btnText = btn.querySelector('.btn-text')
-        const originalText = btnText.innerHTML
-        
-        btnText.innerHTML = 'ENVOI EN COURS...'
-        btn.disabled = true
-
-        try {
-            const formData = new FormData(contactForm)
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            
-            if (response.ok) {
-                formContainer.style.display = 'none'
-                successMsg.classList.remove('hidden')
-                successMsg.style.display = 'flex'
-                contactForm.reset()
-            } else {
-                alert("Erreur lors de l'envoi du message. Veuillez réessayer.")
-            }
-        } catch (error) {
-            alert("Erreur réseau. Veuillez vérifier votre connexion.")
-        } finally {
-            btnText.innerHTML = originalText
-            btn.disabled = false
-        }
-    })
-}
+// Removed custom AJAX to allow FormSubmit to natively redirect and complete the activation captcha.
 
 window.resetForm = () => {
-    contactForm.reset()
-    formContainer.style.display = 'block'
-    successMsg.classList.add('hidden')
-    successMsg.style.display = 'none'
+    if (contactForm) contactForm.reset()
+    if (formContainer) formContainer.style.display = 'block'
+    if (successMsg) {
+        successMsg.classList.add('hidden')
+        successMsg.style.display = 'none'
+    }
 }
 
 // === PROJECT MODALS ===

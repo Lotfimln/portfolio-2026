@@ -2,6 +2,14 @@
 @import "tailwindcss";
 @source "../index.html";
 
+@theme {
+    --color-tata-yellow: #F4D03F;
+    --color-tata-red: #E74C3C;
+    --color-tata-green: #1ABC9C;
+    --color-tata-tan: #FFF9C4;
+    --color-tata-black: #1A1A1B;
+}
+
 /* === DESIGN TOKENS === */
 :root {
     --tata-yellow: #F4D03F;

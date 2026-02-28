@@ -1,14 +1,20 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio de Lotfi Melouane — Développeur Backend & Data. BUT 3 Informatique, spécialisé en architectures serveur et exploitation stratégique de données.">
+    <meta property="og:title" content="Lotfi Melouane | Portfolio 2026">
+    <meta property="og:description" content="Développeur Backend & Data — Projets, expertise technique et parcours.">
+    <meta property="og:type" content="website">
     <title>Lotfi Melouane | Portfolio 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
-        
+
         :root {
             --tata-yellow: #F4D03F;
             --tata-red: #E74C3C;
@@ -17,8 +23,8 @@
             --tata-black: #1A1A1B;
         }
 
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #E5E7EB;
             color: var(--tata-black);
             margin: 0;
@@ -26,13 +32,18 @@
             overflow-x: hidden;
         }
 
-        .mono { font-family: 'Space Mono', monospace; }
+        .mono {
+            font-family: 'Space Mono', monospace;
+        }
 
         /* Texture de grain style Tata Rekso */
         .grainy::before {
             content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             opacity: 0.06;
             pointer-events: none;
@@ -75,9 +86,18 @@
         }
 
         /* Scrollbar brute */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--tata-yellow); border: 2px solid #000; }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--tata-yellow);
+            border: 2px solid #000;
+        }
 
         .tag-pill {
             border: 1px solid #000;
@@ -95,7 +115,8 @@
             color: white;
         }
 
-        input, textarea {
+        input,
+        textarea {
             border: 2px solid #000;
             padding: 10px;
             font-family: 'Space Mono', monospace;
@@ -105,28 +126,338 @@
             color: black;
         }
 
-        input:focus, textarea:focus {
+        input:focus,
+        textarea:focus {
             outline: none;
             box-shadow: 4px 4px 0px #000;
         }
 
-        #success-msg { display: none; }
+        #success-msg {
+            display: none;
+        }
+
+        /* Modal Fullscreen */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: white;
+            color: #1A1A1B;
+            width: 92vw;
+            max-width: 1100px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 3px solid #000;
+            transform: scale(0.92) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            right: 0;
+            z-index: 10;
+            float: right;
+            width: 50px;
+            height: 50px;
+            background: #000;
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #E74C3C;
+        }
+
+        .modal-header {
+            padding: 40px 40px 20px;
+        }
+
+        .modal-header .tag-pill {
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .modal-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 0 40px 40px;
+        }
+
+        .modal-body h4 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 6px;
+            display: inline-block;
+        }
+
+        .modal-body p,
+        .modal-body li {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-body ul li::before {
+            content: "▸ ";
+            font-weight: 900;
+            color: #1ABC9C;
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-bottom: 3px solid #000;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-header h2 {
+                font-size: 2rem;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        /* Project card hover overlay */
+        .project-card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card .hover-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: #F4D03F;
+            text-align: center;
+            padding: 14px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover .hover-label {
+            transform: translateY(0);
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9998;
+            width: 48px;
+            height: 48px;
+            background: #000;
+            color: #F4D03F;
+            border: 2px solid #000;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 0px #F4D03F;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #F4D03F;
+        }
+
+        /* Active nav */
+        .nav-link-active {
+            color: white !important;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #000;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            background: #F4D03F;
+            border: 3px solid #000;
+            border-radius: 50%;
+        }
+
+        .timeline-item.active-item::before {
+            background: #1ABC9C;
+            box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3);
+        }
+
+        .timeline-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #888;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-top: 2px;
+        }
+
+        .timeline-desc {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        /* Staggered reveal */
+        .reveal {
+            transition-delay: 0s;
+        }
+
+        .reveal:nth-child(2) {
+            transition-delay: 0.08s;
+        }
+
+        .reveal:nth-child(3) {
+            transition-delay: 0.16s;
+        }
+
+        .reveal:nth-child(4) {
+            transition-delay: 0.24s;
+        }
+
+        /* Skill bar animation */
+        .skill-bar {
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .skill-bar.animate {
+            width: var(--target-width);
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
     </style>
 </head>
+
 <body class="grainy min-h-screen text-black">
 
     <!-- BARRE LATÉRALE NAVIGATION -->
-    <aside class="fixed left-0 top-0 h-screen w-12 md:w-16 sidebar-gradient border-r-4 border-black z-50 flex flex-col justify-between py-10 items-center">
+    <aside
+        class="fixed left-0 top-0 h-screen w-12 md:w-16 sidebar-gradient border-r-4 border-black z-50 flex flex-col justify-between py-10 items-center">
         <span class="font-black text-xl tracking-tighter mono">L.M</span>
-        <div class="nav-vertical flex justify-center gap-10 py-4 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] mono text-black">
-            <a href="#contact" class="hover:text-white transition-all">CONTACT</a>
-            <a href="#competences" class="hover:text-white transition-all">EXPERTISE</a>
-            <a href="#projets" class="hover:text-white transition-all">PROJETS</a>
-            <a href="#accueil" class="hover:text-white transition-all">ACCUEIL</a>
+        <div
+            class="nav-vertical flex justify-center gap-10 py-4 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] mono text-black">
+            <a href="#contact" data-section="contact" class="nav-link hover:text-white transition-all">CONTACT</a>
+            <a href="#competences" data-section="competences"
+                class="nav-link hover:text-white transition-all">EXPERTISE</a>
+            <a href="#parcours" data-section="parcours" class="nav-link hover:text-white transition-all">PARCOURS</a>
+            <a href="#projets" data-section="projets" class="nav-link hover:text-white transition-all">PROJETS</a>
+            <a href="#accueil" data-section="accueil" class="nav-link hover:text-white transition-all">ACCUEIL</a>
         </div>
         <div class="flex flex-col gap-6 text-xl">
-            <a href="https://github.com/Lotfimln" target="_blank" class="hover:scale-125 transition text-black"><i class="fa-brands fa-github"></i></a>
-            <a href="https://linkedin.com/in/lotfi-melouane" target="_blank" class="hover:scale-125 transition text-black"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/Lotfimln" target="_blank" class="hover:scale-125 transition text-black"><i
+                    class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/lotfi-melouane" target="_blank"
+                class="hover:scale-125 transition text-black"><i class="fa-brands fa-linkedin"></i></a>
         </div>
     </aside>
 
@@ -135,7 +466,8 @@
 
         <!-- SECTION 1 : ACCUEIL -->
         <section id="accueil" class="grid grid-cols-12 gap-2">
-            <div class="col-span-12 lg:col-span-8 bento-tile bg-[#FFF9C4] p-8 md:p-14 reveal active border-black text-black">
+            <div
+                class="col-span-12 lg:col-span-8 bento-tile bg-[#FFF9C4] p-8 md:p-14 reveal active border-black text-black">
                 <div class="space-y-8">
                     <div class="flex items-center gap-4">
                         <span class="tag-pill bg-black text-white border-black">BUT 3 INFORMATIQUE • 2026</span>
@@ -145,21 +477,25 @@
                         Lotfi <br> <span class="bg-black text-white px-2 italic text-6xl md:text-8xl">Melouane</span>
                     </h1>
                     <p class="text-xl md:text-3xl font-bold max-w-2xl leading-snug text-black">
-                        Développeur spécialisé dans la conception d'architectures Backend et l'exploitation stratégique de données.
+                        Développeur spécialisé dans la conception d'architectures Backend et l'exploitation stratégique
+                        de données.
                     </p>
                     <div class="flex items-center gap-4 mt-8 text-black">
                         <div class="p-3 border-2 border-black rounded-full animate-bounce">
                             <i class="fa-solid fa-arrow-down"></i>
                         </div>
-                        <span class="mono text-[10px] font-bold uppercase tracking-widest italic opacity-50">Explorer les réalisations</span>
+                        <span class="mono text-[10px] font-bold uppercase tracking-widest italic opacity-50">Explorer
+                            les réalisations</span>
                     </div>
                 </div>
             </div>
 
             <div class="col-span-12 lg:col-span-4 bento-tile bg-[#1ABC9C] reveal active border-black">
                 <div class="relative h-full min-h-[400px] overflow-hidden group">
-                    <img src="img/PortraitLotfi.JPEG" alt="Portrait Lotfi" class="w-full h-full object-cover contrast-125 transition-transform duration-1000 group-hover:scale-105">
-                    <div class="absolute bottom-6 left-6 bg-white border-2 border-black p-4 font-black text-xs rotate-[-3deg] shadow-lg text-black">
+                    <img src="img/PortraitLotfi.JPEG" alt="Portrait Lotfi"
+                        class="w-full h-full object-cover contrast-125 transition-transform duration-1000 group-hover:scale-105">
+                    <div
+                        class="absolute bottom-6 left-6 bg-white border-2 border-black p-4 font-black text-xs rotate-[-3deg] shadow-lg text-black">
                         Portrait <br>
                     </div>
                 </div>
@@ -171,9 +507,12 @@
             <!-- TITRE SECTION -->
             <div class="col-span-12 md:col-span-4 bento-tile bg-black text-white p-8 reveal active border-black">
                 <div class="h-full flex flex-col justify-between">
-                    <span class="mono text-[10px] font-bold tracking-[0.3em] opacity-50 uppercase">Projets S1 — S6</span>
+                    <span class="mono text-[10px] font-bold tracking-[0.3em] opacity-50 uppercase">Projets S1 —
+                        S6</span>
                     <div>
-                        <h2 class="text-6xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white">Réalisations</h2>
+                        <h2
+                            class="text-6xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white">
+                            Réalisations</h2>
                         <div class="mt-4 h-1 w-20 bg-white border-white"></div>
                     </div>
                     <div class="text-[10px] mono opacity-50 uppercase">Lien entre projets et expertises</div>
@@ -181,14 +520,19 @@
             </div>
 
             <!-- PROJET 1 : IRIT (PHARE) -->
-            <div class="col-span-12 md:col-span-8 bento-tile p-8 md:p-12 reveal active border-black bg-white">
+            <div class="col-span-12 md:col-span-8 bento-tile p-8 md:p-12 reveal active border-black bg-white project-card"
+                data-project="irit">
+                <div class="hover-label">Voir le projet →</div>
                 <div class="flex flex-col lg:flex-row gap-10 h-full">
                     <div class="lg:w-1/2 space-y-6 flex flex-col justify-between">
                         <div class="space-y-4">
                             <span class="tag-pill bg-[#1ABC9C] text-white border-black">PROJET PHARE • STAGE 2025</span>
-                            <h3 class="text-3xl md:text-4xl font-black uppercase leading-none tracking-tighter">Cartographie Scientifique</h3>
+                            <h3 class="text-3xl md:text-4xl font-black uppercase leading-none tracking-tighter">
+                                Cartographie Scientifique</h3>
                             <p class="text-sm font-medium leading-relaxed text-slate-600">
-                                Architecture d'une plateforme de pilotage de la production scientifique. API REST Flask sécurisée (JWT), modélisation Oracle avec requêtes récursives complexes et dashboards interactifs.
+                                Architecture d'une plateforme de pilotage de la production scientifique. API REST Flask
+                                sécurisée (JWT), modélisation Oracle avec requêtes récursives complexes et dashboards
+                                interactifs.
                             </p>
                         </div>
                         <div class="flex flex-wrap gap-2 mono">
@@ -197,15 +541,20 @@
                             <a href="#exp-viz" class="tag-pill border-black">VISUALISATION</a>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 border-2 border-white bg-stone-50 overflow-hidden shadow-[10px_10px_0px_#000] relative">
-                        <img src="img/PageIritGlobal.png" alt="Interface Irit" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-                        <div class="absolute top-4 right-4 bg-white border-2 border-black p-2 font-black text-[10px] uppercase">CSR Prototype</div>
+                    <div
+                        class="lg:w-1/2 border-2 border-white bg-stone-50 overflow-hidden shadow-[10px_10px_0px_#000] relative">
+                        <img src="img/PageIritGlobal.png" alt="Interface Irit"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute top-4 right-4 bg-white border-2 border-black p-2 font-black text-[10px] uppercase">
+                            CSR Prototype</div>
                     </div>
                 </div>
             </div>
 
             <!-- BLOC IDENTITÉ -->
-            <div class="col-span-12 md:col-span-6 bento-tile bg-[#F4D03F] flex items-center justify-center p-8 reveal active text-black border-black text-center">
+            <div
+                class="col-span-12 md:col-span-6 bento-tile bg-[#F4D03F] flex items-center justify-center p-8 reveal active text-black border-black text-center">
                 <div>
                     <span class="text-6xl font-black italic leading-none">a</span>
                     <h2 class="text-4xl font-black tracking-tighter -mt-2 uppercase">Data Specialist</h2>
@@ -214,14 +563,19 @@
             </div>
 
             <!-- PROJET 2 : BINGEMARKING -->
-            <div class="col-span-12 md:col-span-6 bento-tile bg-[#E74C3C] text-white p-8 md:p-12 reveal active border-black">
+            <div class="col-span-12 md:col-span-6 bento-tile bg-[#E74C3C] text-white p-8 md:p-12 reveal active border-black project-card"
+                data-project="bingemarking">
+                <div class="hover-label">Voir le projet →</div>
                 <div class="flex flex-col lg:flex-row gap-10 h-full">
                     <div class="lg:w-1/2 space-y-6 flex flex-col justify-between">
                         <div class="space-y-4">
                             <span class="tag-pill border-white text-white">ANALYSE & ALGORITHMIQUE</span>
-                            <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none text-white">BingeMarking Engine</h3>
+                            <h3
+                                class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none text-white">
+                                BingeMarking Engine</h3>
                             <p class="text-sm font-medium opacity-90 leading-relaxed text-white">
-                                Moteur de recommandation basé sur l'analyse de similarité textuelle (TF-IDF) d'un corpus de 128 séries. Développement d'un pipeline complet de traitement.
+                                Moteur de recommandation basé sur l'analyse de similarité textuelle (TF-IDF) d'un corpus
+                                de 128 séries. Développement d'un pipeline complet de traitement.
                             </p>
                         </div>
                         <div class="flex gap-2">
@@ -230,18 +584,23 @@
                         </div>
                     </div>
                     <div class="lg:w-1/2 border-2 border-white bg-stone-50 overflow-hidden shadow-[10px_10px_0px_#000]">
-                        <img src="img/BingeMarking.png" alt="BingeMarking" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <img src="img/BingeMarking.png" alt="BingeMarking"
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                     </div>
                 </div>
             </div>
 
             <!-- PROJET 3 : DATA WAREHOUSE -->
-            <div id="data-warehouse" class="col-span-12 md:col-span-6 bento-tile bg-white p-8 md:p-10 reveal active text-black border-black">
+            <div id="data-warehouse"
+                class="col-span-12 md:col-span-6 bento-tile bg-white p-8 md:p-10 reveal active text-black border-black project-card"
+                data-project="warehouse">
+                <div class="hover-label">Voir le projet →</div>
                 <div class="space-y-6">
                     <span class="tag-pill bg-black text-white border-black">CONCEPTION DÉCISIONNELLE</span>
                     <h3 class="text-4xl font-black uppercase tracking-tighter text-black">Entrepôt de Données</h3>
                     <p class="text-sm font-medium text-slate-600 leading-relaxed">
-                        Mise en place d'une infrastructure décisionnelle complète via Talend Open Studio. Modélisation en étoile (Faits/Dimensions), consolidation et historisation.
+                        Mise en place d'une infrastructure décisionnelle complète via Talend Open Studio. Modélisation
+                        en étoile (Faits/Dimensions), consolidation et historisation.
                     </p>
                     <div class="grid grid-cols-2 gap-4 border-t border-black pt-6">
                         <div>
@@ -249,7 +608,8 @@
                             <a href="#exp-data" class="text-[10px] font-bold uppercase underline">Talend / Oracle</a>
                         </div>
                         <div>
-                            <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1 text-black">Focus</span>
+                            <span
+                                class="mono text-[9px] font-black uppercase opacity-40 block mb-1 text-black">Focus</span>
                             <span class="text-[10px] font-bold uppercase">Historisation</span>
                         </div>
                     </div>
@@ -257,18 +617,70 @@
             </div>
 
             <!-- PROJET 4 : API SPORT -->
-            <div class="col-span-12 md:col-span-6 bento-tile bg-[#1ABC9C] p-8 md:p-10 reveal active text-white border-black">
+            <div class="col-span-12 md:col-span-6 bento-tile bg-[#1ABC9C] p-8 md:p-10 reveal active text-white border-black project-card"
+                data-project="api-sport">
+                <div class="hover-label">Voir le projet →</div>
                 <div class="h-full flex flex-col justify-between">
                     <div class="space-y-4">
                         <span class="tag-pill border-white text-white">DÉVELOPPEMENT SERVEUR</span>
-                        <h3 class="text-4xl font-black uppercase tracking-tighter leading-none text-white">Gestion d'Effectifs API</h3>
+                        <h3 class="text-4xl font-black uppercase tracking-tighter leading-none text-white">Gestion
+                            d'Effectifs API</h3>
                         <p class="text-sm font-bold opacity-90 leading-relaxed text-white">
-                            Conception d'un service REST robuste avec authentification (JWT). Architecture modulaire permettant une gestion fluide des effectifs.
+                            Conception d'un service REST robuste avec authentification (JWT). Architecture modulaire
+                            permettant une gestion fluide des effectifs.
                         </p>
                     </div>
                     <div class="mt-8 flex justify-between items-center text-white">
-                        <a href="#exp-backend" class="mono text-[10px] font-bold uppercase underline text-white">Java / Python / Git</a>
-                        <div class="w-10 h-10 border border-white flex items-center justify-center rounded-full text-white"><i class="fa-solid fa-code text-white"></i></div>
+                        <a href="#exp-backend" class="mono text-[10px] font-bold uppercase underline text-white">Java /
+                            Python / Git</a>
+                        <div
+                            class="w-10 h-10 border border-white flex items-center justify-center rounded-full text-white">
+                            <i class="fa-solid fa-code text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION PARCOURS (TIMELINE) -->
+        <section id="parcours" class="grid grid-cols-12 gap-2 text-black">
+            <div class="col-span-12 md:col-span-4 bento-tile bg-black text-white p-8 reveal border-black">
+                <div class="h-full flex flex-col justify-between">
+                    <span class="mono text-[10px] font-bold tracking-[0.3em] opacity-50 uppercase">Formation</span>
+                    <div>
+                        <h2
+                            class="text-6xl md:text-7xl font-black italic uppercase leading-none tracking-tighter text-white">
+                            Parcours</h2>
+                        <div class="mt-4 h-1 w-20 bg-white"></div>
+                    </div>
+                    <div class="text-[10px] mono opacity-50 uppercase">Du BUT 1 au BUT 3</div>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-8 bento-tile bg-white p-8 md:p-12 reveal border-black">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023 — 2024</div>
+                        <div class="timeline-title">BUT 1 Informatique</div>
+                        <div class="timeline-desc">Fondamentaux de la programmation, algorithmique, bases de données
+                            relationnelles et introduction aux réseaux.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024 — 2025</div>
+                        <div class="timeline-title">BUT 2 Informatique</div>
+                        <div class="timeline-desc">Approfondissement Backend (Java, PHP), conception de bases avancées,
+                            développement web full-stack et gestion de projet agile.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">Été 2025</div>
+                        <div class="timeline-title">Stage IRIT — Cartographie Scientifique</div>
+                        <div class="timeline-desc">Conception d'une plateforme de pilotage scientifique : API Flask,
+                            modélisation Oracle, dashboards interactifs. Projet phare du parcours.</div>
+                    </div>
+                    <div class="timeline-item active-item">
+                        <div class="timeline-year">2025 — 2026</div>
+                        <div class="timeline-title">BUT 3 — Spécialisation AGED & IA</div>
+                        <div class="timeline-desc">Administration, Gestion et Exploitation des Données. Intelligence
+                            artificielle, entrepôts de données, analyse décisionnelle avancée.</div>
                     </div>
                 </div>
             </div>
@@ -277,7 +689,8 @@
         <!-- SECTION 3 : EXPERTISE -->
         <section id="competences" class="grid grid-cols-12 gap-2 text-black">
             <div class="col-span-12 lg:col-span-4 bento-tile p-12 reveal active text-black border-black">
-                <h2 class="text-5xl font-black italic mb-10 uppercase tracking-tighter leading-none text-black">Expertise <br> <span class="text-[#1ABC9C]">technique</span></h2>
+                <h2 class="text-5xl font-black italic mb-10 uppercase tracking-tighter leading-none text-black">
+                    Expertise <br> <span class="text-[#1ABC9C]">technique</span></h2>
                 <div class="space-y-10">
                     <div class="space-y-2">
                         <div class="flex justify-between mono text-[10px] font-black uppercase text-slate-500">
@@ -314,8 +727,11 @@
                 <div id="exp-backend" class="bento-tile bg-[#FFF9C4] p-8 reveal active border-black scroll-mt-24">
                     <div class="h-full flex flex-col justify-between">
                         <div>
-                            <span class="mono text-[10px] font-black uppercase mb-4 block opacity-50 text-black">Langages & Logique</span>
-                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-black">Développement <br> Serveur</h4>
+                            <span
+                                class="mono text-[10px] font-black uppercase mb-4 block opacity-50 text-black">Langages
+                                & Logique</span>
+                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-black">Développement <br>
+                                Serveur</h4>
                             <div class="flex flex-wrap gap-2 text-black">
                                 <span class="tag-pill border-black bg-white">Python / Flask</span>
                                 <span class="tag-pill border-black bg-white">Java</span>
@@ -325,16 +741,21 @@
                                 <span class="tag-pill border-black bg-white">SQLAlchemy</span>
                             </div>
                         </div>
-                        <p class="text-xs font-bold leading-relaxed text-slate-600 mt-6 text-black">Conception d'architectures modulaires sécurisées, gestion des sessions et routage API optimisé.</p>
+                        <p class="text-xs font-bold leading-relaxed text-slate-600 mt-6 text-black">Conception
+                            d'architectures modulaires sécurisées, gestion des sessions et routage API optimisé.</p>
                     </div>
                 </div>
 
                 <!-- Stack Data (Ancre exp-data et exp-viz) -->
-                <div id="exp-data" class="bento-tile bg-[#1ABC9C] p-8 reveal active border-black text-white scroll-mt-24">
+                <div id="exp-data"
+                    class="bento-tile bg-[#1ABC9C] p-8 reveal active border-black text-white scroll-mt-24">
                     <div id="exp-viz" class="h-full flex flex-col justify-between text-white scroll-mt-24">
                         <div>
-                            <span class="mono text-[10px] font-black uppercase mb-4 block opacity-70 text-white">Extraction & Valorisation</span>
-                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-white">Architecture <br> des Données</h4>
+                            <span
+                                class="mono text-[10px] font-black uppercase mb-4 block opacity-70 text-white">Extraction
+                                & Valorisation</span>
+                            <h4 class="text-2xl font-black uppercase mb-6 tracking-tight text-white">Architecture <br>
+                                des Données</h4>
                             <div class="flex flex-wrap gap-2">
                                 <span class="tag-pill border-white bg-white text-black">Oracle SQL</span>
                                 <span class="tag-pill border-white bg-white text-black">Talend ETL</span>
@@ -344,14 +765,17 @@
                                 <span class="tag-pill border-white bg-white text-black">TF-IDF</span>
                             </div>
                         </div>
-                        <p class="text-[10px] font-bold leading-relaxed opacity-90 mt-6 text-white">Maîtrise du cycle de la donnée : modélisation (MCD/MLD), flux ETL et restitution via dashboards stratégiques.</p>
+                        <p class="text-[10px] font-bold leading-relaxed opacity-90 mt-6 text-white">Maîtrise du cycle de
+                            la donnée : modélisation (MCD/MLD), flux ETL et restitution via dashboards stratégiques.</p>
                     </div>
                 </div>
 
                 <!-- Outils & Environnement -->
-                <div class="col-span-1 md:col-span-2 bento-tile bg-white p-6 reveal active border-black flex flex-row items-center justify-between text-black">
+                <div
+                    class="col-span-1 md:col-span-2 bento-tile bg-white p-6 reveal active border-black flex flex-row items-center justify-between text-black">
                     <div>
-                        <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1">Environnement & Outils</span>
+                        <span class="mono text-[9px] font-black uppercase opacity-40 block mb-1">Environnement &
+                            Outils</span>
                         <div class="flex flex-wrap gap-3">
                             <span class="text-xs font-black uppercase tracking-widest text-black">GitHub</span>
                             <span class="text-xs opacity-20">/</span>
@@ -366,7 +790,9 @@
                             <span class="text-xs font-black uppercase tracking-widest text-black">Postman</span>
                         </div>
                     </div>
-                    <div class="text-4xl font-black italic opacity-10 hidden md:block uppercase tracking-tighter text-black">Tools</div>
+                    <div
+                        class="text-4xl font-black italic opacity-10 hidden md:block uppercase tracking-tighter text-black">
+                        Tools</div>
                 </div>
             </div>
         </section>
@@ -374,27 +800,35 @@
         <!-- SECTION 4 : CONTACT & CV -->
         <section id="contact" class="grid grid-cols-12 gap-2 text-black">
             <!-- CTA GAUCHE -->
-            <div class="col-span-12 lg:col-span-7 bento-tile bg-white p-10 md:p-14 reveal active text-black border-black">
+            <div
+                class="col-span-12 lg:col-span-7 bento-tile bg-white p-10 md:p-14 reveal active text-black border-black">
                 <div class="h-full flex flex-col justify-between">
                     <div>
-                        <h2 class="text-6xl md:text-8xl font-black mb-8 uppercase tracking-tighter leading-none text-black">Parlons <br> DATA.</h2>
-                        <p class="text-xl font-bold mb-12 text-black">Disponible pour collaborer sur des défis Backend et Data dès fin 2026.</p>
+                        <h2
+                            class="text-6xl md:text-8xl font-black mb-8 uppercase tracking-tighter leading-none text-black">
+                            Parlons <br> DATA.</h2>
+                        <p class="text-xl font-bold mb-12 text-black">Disponible pour collaborer sur des défis Backend
+                            et Data dès fin 2026.</p>
                     </div>
                     <div class="space-y-4">
-                        <a href="mailto:lotfi.melouane@gmail.com" class="text-2xl md:text-4xl font-black hover:text-[#E74C3C] transition-colors border-b-4 border-black inline-block leading-none mono border-black text-black">lotfi.melouane@gmail.com</a>
-                        <p class="text-[10px] mono font-bold text-slate-400 mt-4 uppercase tracking-widest">Toulouse // Mobile France</p>
+                        <a href="mailto:lotfi.melouane@gmail.com"
+                            class="text-2xl md:text-4xl font-black hover:text-[#E74C3C] transition-colors border-b-4 border-black inline-block leading-none mono border-black text-black">lotfi.melouane@gmail.com</a>
+                        <p class="text-[10px] mono font-bold text-slate-400 mt-4 uppercase tracking-widest">Toulouse //
+                            Mobile France</p>
                     </div>
                 </div>
             </div>
-            
+
             <!-- CV & FORMULAIRE -->
             <div class="col-span-12 lg:col-span-5 bento-tile bg-[#F4D03F] p-8 reveal active text-black border-black">
                 <div class="h-full flex flex-col gap-8 text-black">
                     <!-- Partie CV -->
                     <div>
                         <span class="tag-pill bg-black text-white border-black text-white">Contact</span>
-                        <h3 class="text-5xl font-black italic mt-4 uppercase leading-none tracking-tighter text-black">CV 2026</h3>
-                        <a href="CV_Lotfi_Melouane.pdf" target="_blank" class="mt-6 bg-black text-white px-8 py-5 text-xs font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 mono w-full text-white">
+                        <h3 class="text-5xl font-black italic mt-4 uppercase leading-none tracking-tighter text-black">
+                            CV 2026</h3>
+                        <a href="CV_Lotfi_Melouane.pdf" target="_blank"
+                            class="mt-6 bg-black text-white px-8 py-5 text-xs font-black uppercase border-2 border-black hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 mono w-full text-white">
                             Consulter le PDF <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-white"></i>
                         </a>
                     </div>
@@ -404,24 +838,34 @@
                     <!-- Formulaire de Contact avec gestion JS -->
                     <div class="flex-grow relative text-black">
                         <div id="form-container">
-                            <h4 class="mono text-[10px] font-black uppercase mb-4 italic tracking-widest text-black">Contact rapide /</h4>
+                            <h4 class="mono text-[10px] font-black uppercase mb-4 italic tracking-widest text-black">
+                                Contact rapide /</h4>
                             <form id="contact-form" class="space-y-3">
-                                <input type="text" name="name" placeholder="VOTRE NOM" required class="placeholder-black/30 border-black text-black">
-                                <input type="email" name="email" placeholder="VOTRE EMAIL" required class="placeholder-black/30 border-black text-black">
-                                <textarea name="message" placeholder="VOTRE MESSAGE" rows="3" required class="placeholder-black/30 border-black text-black"></textarea>
-                                <button type="submit" class="bg-black text-white px-6 py-4 text-[10px] font-black uppercase border-2 border-black hover:bg-[#1ABC9C] transition-all w-full mono border-black text-white">
+                                <input type="text" name="name" placeholder="VOTRE NOM" required
+                                    class="placeholder-black/30 border-black text-black">
+                                <input type="email" name="email" placeholder="VOTRE EMAIL" required
+                                    class="placeholder-black/30 border-black text-black">
+                                <textarea name="message" placeholder="VOTRE MESSAGE" rows="3" required
+                                    class="placeholder-black/30 border-black text-black"></textarea>
+                                <button type="submit"
+                                    class="bg-black text-white px-6 py-4 text-[10px] font-black uppercase border-2 border-black hover:bg-[#1ABC9C] transition-all w-full mono border-black text-white">
                                     Envoyer la demande ✖
                                 </button>
                             </form>
                         </div>
-                        
-                        <div id="success-msg" class="h-full flex flex-col items-center justify-center text-center space-y-4 py-6 text-black">
-                            <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center text-xl border-2 border-black shadow-[4px_4px_0px_#1ABC9C]">
+
+                        <div id="success-msg"
+                            class="h-full flex flex-col items-center justify-center text-center space-y-4 py-6 text-black">
+                            <div
+                                class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center text-xl border-2 border-black shadow-[4px_4px_0px_#1ABC9C]">
                                 <i class="fa-solid fa-check text-white"></i>
                             </div>
                             <h4 class="font-black uppercase tracking-widest text-black">Message Reçu !</h4>
-                            <p class="mono text-[10px] font-bold uppercase text-black">Merci, Lotfi vous répondra très vite.</p>
-                            <button onclick="resetForm()" class="text-[9px] font-black underline uppercase mono mt-2 hover:text-[#1ABC9C] text-black">Renvoyer un autre message</button>
+                            <p class="mono text-[10px] font-bold uppercase text-black">Merci, Lotfi vous répondra très
+                                vite.</p>
+                            <button onclick="resetForm()"
+                                class="text-[9px] font-black underline uppercase mono mt-2 hover:text-[#1ABC9C] text-black">Renvoyer
+                                un autre message</button>
                         </div>
                     </div>
                 </div>
@@ -438,13 +882,228 @@
 
     </main>
 
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- MODALES PROJETS -->
+    <!-- Modal IRIT -->
+    <div class="modal-overlay" id="modal-irit">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('irit')">&times;</button>
+            <img src="img/PageIritGlobal.png" alt="Cartographie Scientifique IRIT" class="modal-img">
+            <div class="modal-header">
+                <span class="tag-pill bg-[#1ABC9C] text-white border-black">PROJET PHARE • STAGE 2025</span>
+                <h2>Cartographie Scientifique</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div>
+                        <h4>Contexte & Objectifs</h4>
+                        <p>Stage réalisé à l'IRIT (Institut de Recherche en Informatique de Toulouse). L'objectif était
+                            de concevoir une plateforme complète de pilotage de la production scientifique du
+                            laboratoire, permettant aux décideurs de visualiser et analyser les publications,
+                            collaborations et tendances de recherche.</p>
+                    </div>
+                    <div>
+                        <h4>Architecture Technique</h4>
+                        <ul>
+                            <li>API REST Flask sécurisée avec authentification JWT</li>
+                            <li>Modélisation Oracle avec requêtes récursives complexes (CTE)</li>
+                            <li>Dashboards interactifs Chart.js pour la restitution visuelle</li>
+                            <li>Architecture MVC modulaire et documentée</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Défis Techniques</h4>
+                        <p>La complexité résidait dans la modélisation des hiérarchies organisationnelles via des
+                            requêtes récursives Oracle et dans la sécurisation de l'API avec un système de tokens JWT.
+                            L'optimisation des requêtes sur un volume important de données scientifiques a été
+                            essentielle.</p>
+                    </div>
+                    <div>
+                        <h4>Résultats & Apprentissages</h4>
+                        <ul>
+                            <li>Plateforme fonctionnelle déployée et utilisée par l'équipe IRIT</li>
+                            <li>Maîtrise approfondie de Flask, Oracle et de la sécurité API</li>
+                            <li>Rédaction d'une documentation technique complète</li>
+                            <li>Compétences en gestion de projet autonome</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:8px;">
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Python / Flask</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Oracle SQL</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">JWT Auth</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Chart.js</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">API REST</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal BingeMarking -->
+    <div class="modal-overlay" id="modal-bingemarking">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('bingemarking')">&times;</button>
+            <img src="img/BingeMarking.png" alt="BingeMarking Engine" class="modal-img">
+            <div class="modal-header">
+                <span class="tag-pill bg-[#E74C3C] text-white border-black">ANALYSE & ALGORITHMIQUE</span>
+                <h2>BingeMarking Engine</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div>
+                        <h4>Contexte & Objectifs</h4>
+                        <p>Conception d'un moteur de recommandation intelligent capable de suggérer des séries TV
+                            similaires en se basant sur l'analyse textuelle des descriptions. Le projet exploite un
+                            corpus de 128 séries pour calculer des scores de similarité via l'algorithme TF-IDF.</p>
+                    </div>
+                    <div>
+                        <h4>Pipeline Technique</h4>
+                        <ul>
+                            <li>Scraping et nettoyage du corpus de données (128 séries)</li>
+                            <li>Tokenisation et vectorisation TF-IDF avec scikit-learn</li>
+                            <li>Calcul de similarité cosinus entre les vecteurs</li>
+                            <li>Interface Flask pour l'interaction utilisateur</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Défis Techniques</h4>
+                        <p>L'enjeu principal était d'optimiser la qualité des recommandations en affinant le
+                            prétraitement textuel (suppression des stop-words, lemmatisation) et en trouvant les bons
+                            paramètres TF-IDF pour maximiser la pertinence des résultats.</p>
+                    </div>
+                    <div>
+                        <h4>Résultats & Apprentissages</h4>
+                        <ul>
+                            <li>Moteur fonctionnel avec recommandations pertinentes</li>
+                            <li>Maîtrise du NLP basique et de la vectorisation textuelle</li>
+                            <li>Compréhension approfondie des algorithmes de similarité</li>
+                            <li>Pipeline de données complet de bout en bout</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:8px;">
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Python</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Flask</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">scikit-learn</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">TF-IDF</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">NLP</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Data Warehouse -->
+    <div class="modal-overlay" id="modal-warehouse">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('warehouse')">&times;</button>
+            <div class="modal-header" style="padding-top:60px;">
+                <span class="tag-pill bg-black text-white border-black">CONCEPTION DÉCISIONNELLE</span>
+                <h2>Entrepôt de Données</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div>
+                        <h4>Contexte & Objectifs</h4>
+                        <p>Mise en place d'une infrastructure décisionnelle complète pour centraliser et historiser les
+                            données d'une organisation. Le projet couvre l'intégralité du cycle décisionnel :
+                            extraction, transformation, chargement (ETL) et restitution via tableaux de bord.</p>
+                    </div>
+                    <div>
+                        <h4>Architecture Technique</h4>
+                        <ul>
+                            <li>Modélisation dimensionnelle en étoile (Faits / Dimensions)</li>
+                            <li>Flux ETL complets avec Talend Open Studio</li>
+                            <li>Base de données Oracle pour le stockage</li>
+                            <li>Historisation de type SCD (Slowly Changing Dimensions)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Défis Techniques</h4>
+                        <p>La gestion de l'historisation des données (type 2 SCD) et la conception de flux ETL robustes
+                            capables de gérer les cas d'erreur et les mises à jour incrémentales ont constitué les
+                            principaux défis techniques de ce projet.</p>
+                    </div>
+                    <div>
+                        <h4>Résultats & Apprentissages</h4>
+                        <ul>
+                            <li>Entrepôt fonctionnel avec données historisées</li>
+                            <li>Maîtrise de Talend Open Studio et des flux ETL</li>
+                            <li>Compréhension de la modélisation dimensionnelle</li>
+                            <li>Capacité à concevoir une architecture BI complète</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:8px;">
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Talend ETL</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Oracle SQL</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Modélisation</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">SCD Type 2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal API Sport -->
+    <div class="modal-overlay" id="modal-api-sport">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('api-sport')">&times;</button>
+            <div class="modal-header" style="padding-top:60px;">
+                <span class="tag-pill bg-[#1ABC9C] text-white border-black">DÉVELOPPEMENT SERVEUR</span>
+                <h2>Gestion d'Effectifs API</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div>
+                        <h4>Contexte & Objectifs</h4>
+                        <p>Conception d'un service REST robuste pour la gestion d'effectifs sportifs. Le projet met
+                            l'accent sur une architecture modulaire, la sécurisation des endpoints via JWT et la
+                            documentation API avec Postman.</p>
+                    </div>
+                    <div>
+                        <h4>Architecture Technique</h4>
+                        <ul>
+                            <li>API REST avec endpoints CRUD complets</li>
+                            <li>Authentification et autorisation via JWT</li>
+                            <li>Architecture modulaire (routes, controllers, models)</li>
+                            <li>Tests et documentation Postman</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Défis Techniques</h4>
+                        <p>L'implémentation d'un système d'authentification sécurisé avec gestion des rôles et des
+                            permissions, ainsi que la structuration modulaire du code pour garantir maintenabilité et
+                            scalabilité ont été les principaux défis.</p>
+                    </div>
+                    <div>
+                        <h4>Résultats & Apprentissages</h4>
+                        <ul>
+                            <li>API fonctionnelle et entièrement documentée</li>
+                            <li>Maîtrise des patterns d'authentification JWT</li>
+                            <li>Compétences en architecture logicielle modulaire</li>
+                            <li>Collaboration Git en équipe avec workflow branching</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top:30px; display:flex; flex-wrap:wrap; gap:8px;">
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Java</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Python</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">JWT</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Git</span>
+                    <span class="tag-pill border-black bg-[#FFF9C4]">Postman</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Reveal Observer
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
@@ -453,20 +1112,75 @@
         const contactForm = document.getElementById('contact-form');
         const formContainer = document.getElementById('form-container');
         const successMsg = document.getElementById('success-msg');
-
-        if(contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 formContainer.style.display = 'none';
                 successMsg.style.display = 'flex';
             });
         }
-
-        window.resetForm = function() {
+        window.resetForm = function () {
             contactForm.reset();
             formContainer.style.display = 'block';
             successMsg.style.display = 'none';
         }
+
+        // === MODALES ===
+        function openModal(id) {
+            const m = document.getElementById('modal-' + id);
+            if (!m) return;
+            m.classList.add('open');
+            document.body.classList.add('modal-open');
+        }
+        function closeModal(id) {
+            const m = document.getElementById('modal-' + id);
+            if (!m) return;
+            m.classList.remove('open');
+            document.body.classList.remove('modal-open');
+        }
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function (e) {
+                if (e.target.closest('a')) return; // don't hijack tag links
+                openModal(this.dataset.project);
+            });
+        });
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    const id = this.id.replace('modal-', '');
+                    closeModal(id);
+                }
+            });
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.open').forEach(m => {
+                    m.classList.remove('open');
+                    document.body.classList.remove('modal-open');
+                });
+            }
+        });
+
+        // === ACTIVE NAV ===
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(l => l.classList.remove('nav-link-active'));
+                    const active = document.querySelector('.nav-link[data-section="' + entry.target.id + '"]');
+                    if (active) active.classList.add('nav-link-active');
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-10% 0px -60% 0px' });
+        sections.forEach(s => navObserver.observe(s));
+
+        // === BACK TO TOP ===
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backBtn.classList.toggle('visible', window.scrollY > 600);
+        });
     </script>
 </body>
+
 </html>

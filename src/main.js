@@ -13,16 +13,37 @@ const contactForm = document.getElementById('contact-form')
 const formContainer = document.getElementById('form-container')
 const successMsg = document.getElementById('success-msg')
 
-// Removed custom AJAX to allow FormSubmit to natively redirect and complete the activation captcha.
+// JS check for FormSubmit redirect success
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('submitted') === 'true') {
+        if (formContainer && successMsg) {
+            formContainer.style.display = 'none';
+            successMsg.classList.remove('hidden');
+            successMsg.style.display = 'flex';
+
+            // Scroll to contact section
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                setTimeout(() => contactSection.scrollIntoView(), 100);
+            }
+        }
+    }
+});
 
 window.resetForm = () => {
-    if (contactForm) contactForm.reset()
-    if (formContainer) formContainer.style.display = 'block'
+    // Retirer le paramètre de l'URL pour éviter qu'il ne s'affiche au refresh global
+    const url = new URL(window.location);
+    url.searchParams.delete('submitted');
+    window.history.replaceState({}, '', url);
+
+    if (contactForm) contactForm.reset();
+    if (formContainer) formContainer.style.display = 'block';
     if (successMsg) {
-        successMsg.classList.add('hidden')
-        successMsg.style.display = 'none'
+        successMsg.classList.add('hidden');
+        successMsg.style.display = 'none';
     }
-}
+};
 
 // === PROJECT MODALS ===
 function openModal(id) {
